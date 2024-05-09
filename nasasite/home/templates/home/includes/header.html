@@ -1,0 +1,30 @@
+{% load static %}
+
+<header class="bg-dark d-flex align-items-center">
+  <div class="content-container w-100 row mx-auto align-items-center">
+
+    <div class="col-3">
+      <img class="justify-self-start" src="{% static 'home/img/nasa-logo.svg' %}" alt="NASA логотип">
+    </div>
+
+    <nav class="col-6">
+      <ul class="m-0 p-0 mx-auto align-self-center text-white d-flex justify-content-center align-items-center">
+        <li class="">
+          <a href="#first-block">Преимущества</a>
+        </li>
+        <li class="">
+          <a href="#first-block">Фотографии</a>
+        </li>
+      </ul>
+    </nav>
+
+    <div class="user-actions col-3 d-flex justify-content-end">
+      <a href="/admin">
+        <button class="header__login_button">
+          Вход
+        </button>
+      </a>
+    </div>
+
+  </div>
+</header>

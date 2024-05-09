@@ -1,0 +1,73 @@
+{% extends 'home/base.html' %}
+
+{% load static %}
+{% load thumbnail %}
+
+{% block main %}
+<section id="first-block" class="first-block content-container">
+    <div class="first-block__text d-flex flex-column">
+        <h1>Космическое агенство</h1>
+
+        <p class="text">
+            Национальное управление по аэронавтике и исследованию космического
+            пространства — ведомство, относящееся к федеральному правительству США
+            и подчиняющееся непосредственно президенту США.
+        </p>
+    </div>
+
+    <div class="first-block__images w-100">
+        <div class="d-flex flex-column gap-4 justify-content-center">
+            <div class="d-flex gap-4 align-items-center">
+                <div class="first-block__item">
+                    <img src="{% static 'home/img/fa6-solid_shuttle-space.svg' %}" alt="">
+                    <h3>Спейс шаттлы — пилотируемые корабли</h3>
+                </div>
+
+                <div class="first-block__item">
+                    <img src="{% static 'home/img/ion_telescope.svg' %}" alt="">
+                    <h3>Лучшее телескопическое оборудование</h3>
+                </div>
+            </div>
+
+            <div class="d-flex gap-4 align-items-center">
+                <div class="first-block__item">
+                    <img src="{% static 'home/img/bi_moon-stars-fill.svg' %}" alt="">
+                    <h3>Целимся на Луну и Марс</h3>
+                </div>
+
+                <div class="first-block__item">
+                    <img src="{% static 'home/img/bxs_medal.svg' %}" alt="">
+                    <h3>Золотая медаль по научным исследованиям</h3>
+                </div>
+            </div>
+        </div>
+
+        <img class="rounded-5 first-block__main-image" src="{% static 'home/img/first_block_img.webp' %}" alt="">
+    </div>
+</section>
+
+<section id="slider-section">
+    <div class="p-2 content-container d-flex flex-column align-items-center">
+        <h2>Фотографии</h2>
+
+        <div class="slider-content w-100">
+            <div class="slider-main">
+                {% for slider_image in slider_images %}
+                <div>
+                    <img class="rounded-5" src="{{slider_image.image.url}}" alt="">
+                </div>
+                {% endfor %}
+            </div>
+
+            <div class="slider-nav">
+                {% for slider_image in slider_images %}
+                <div>
+                    <img class="rounded-5" src="{{slider_image.image.url}}" alt="{{slider_image.alt_text}}">
+                </div>
+                {% endfor %}
+            </div>
+            <!-- <img  class="slider-nav__arrow" src="{% static 'home/img/arrow-left.svg' %}" alt=""> -->
+        </div>
+    </div>
+</section>
+{% endblock %}

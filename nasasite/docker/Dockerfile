@@ -1,0 +1,26 @@
+FROM python:3.11.9-bookworm
+
+# обновляем сисетму и ставим зависимости для mysqlcliet
+RUN apt update && apt upgrade -y
+RUN apt-get install python3.11-dev default-libmysqlclient-dev build-essential pkg-config -y
+
+# задаем переменные для того, чтобы не писать пути 100500 раз
+ENV HOME_DIR=/home/django/
+ENV APP_PATH=${HOME_DIR}/nasa_site
+
+# создаем катклог, копируем проект и ставим зависимости
+RUN mkdir -p ${APP_PATH}
+WORKDIR ${APP_PATH}
+COPY . .
+RUN pip install --no-cache-dir -r requirements.txt
+
+# создаем системную группу django
+RUN addgroup --system django
+# создаем системного пользовтеля django
+RUN adduser --system --group django
+
+# меняем владельца домашней папки пользвотеля с root на django:django
+RUN chown -R django:django ${HOME_DIR}
+
+# меняет пользовтеля контейнера на django - чтобы у него не было root привелегий
+USER django

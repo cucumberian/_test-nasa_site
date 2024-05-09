@@ -1,0 +1,5 @@
+django
+django-filer
+django-admin-sortable2
+python-dotenv
+mysqlclient
