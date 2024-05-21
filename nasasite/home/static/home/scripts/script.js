@@ -39,4 +39,12 @@ $(document).on('ready', function() {
     focusOnSelect: true
   });
 
+  const lightbox = GLightbox({
+    selector: '[data-lightbox="glightbox"]',
+    touchNavigation: true,
+    loop: true,
+    autoplayVideos: true
+  });
+  // lightbox.open();
+
 });

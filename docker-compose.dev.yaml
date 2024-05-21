@@ -1,0 +1,47 @@
+version: "3.6"
+
+services:
+  mysql:
+    image: mysql
+    restart: unless-stopped
+    ports:
+      - 3336:3306
+    env_file:
+      - .env
+    environment:
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_DATABASE=${DB_NAME}
+      - MYSQL_USER=${DB_USER}
+      - MYSQL_PASSWORD=${DB_PASS}
+    volumes:
+      - mysql_nasa:/var/lib/mysql
+
+  django:
+    build:
+      context: nasasite/
+      dockerfile: docker/Dockerfile.dev
+    command: sh -c "bash run.sh"
+    restart: unless-stopped
+    ports:
+      - 8080:8000
+    env_file: .env
+    environment:
+      - DJANGO_SUPERUSER_PASSWORD=${DJANGO_SUPERUSER_PASSWORD}
+      - DJANGO_SUPERUSER_USERNAME=${DJANGO_SUPERUSER_USERNAME}
+      - DJANGO_SUPERUSER_EMAIL=${DJANGO_SUPERUSER_EMAIL}
+      - SECRET_KEY=${SECRET_KEY}
+      - DB_HOST=mysql
+      - DB_PORT=3306
+      - DB_NAME=${DB_NAME}
+      - DB_USER=${DB_USER}
+      - DB_PASS=${DB_PASS}
+    depends_on:
+      - mysql
+    volumes:
+      - django_images:/home/django/nasa_site/media
+      - ./nasasite/nasasite/:/home/django/nasa_site/nasasite/
+      - ./nasasite/home/:/home/django/nasa_site/home/
+
+volumes:
+  mysql_nasa:
+  django_images:

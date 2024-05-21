@@ -15,9 +15,9 @@ COPY . .
 RUN pip install --no-cache-dir -r requirements.txt
 
 # создаем системную группу django
-RUN addgroup --system django
+# RUN addgroup --system django
 # создаем системного пользовтеля django
-RUN adduser --system --group django
+# RUN adduser --system --group django
 
 # меняем владельца домашней папки пользвотеля с root на django:django
 # RUN chown -R django:django ${HOME_DIR}

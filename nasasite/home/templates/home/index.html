@@ -54,7 +54,9 @@
             <div class="slider-main">
                 {% for slider_image in slider_images %}
                 <div>
-                    <img class="rounded-5" src="{{slider_image.image.url}}" alt="">
+                    <a href="{{ slider_image.image.url }}" data-lightbox="glightbox">
+                        <img class="rounded-5" src="{% thumbnail slider_image.image 1920x1080 crop quality=70 %}" alt="">
+                    </a>
                 </div>
                 {% endfor %}
             </div>
@@ -62,7 +64,7 @@
             <div class="slider-nav">
                 {% for slider_image in slider_images %}
                 <div>
-                    <img class="rounded-5" src="{{slider_image.image.url}}" alt="{{slider_image.alt_text}}">
+                    <img class="rounded-5" src="{% thumbnail slider_image.image 1920x1080 crop quality=70 %}" alt="{{slider_image.alt_text}}">
                 </div>
                 {% endfor %}
             </div>
